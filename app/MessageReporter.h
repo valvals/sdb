@@ -1,0 +1,33 @@
+#ifndef MESSAGEREPORTER_H
+#define MESSAGEREPORTER_H
+
+namespace sdb{
+
+enum ERRORS {
+    NO_SPACE_IN_LINE_ERROR,
+    PARSE_TO_VALUE_ERROR,
+    NO_2_ELEMNTS_ERROR,
+    LINE_IS_EMPTY,
+    FAIL_TO_ADD_OBJECT_TO_DB,
+    DATA_BASE_ERROR
+};
+
+enum WARNINGS {
+    TAB_SEPARATOR,
+    COMMA_DECIMAL,
+    NO_OBJECT_FILLED,
+    NO_LOCATION_NAME_FILLED,
+    LOCATION_NAME_IS_NOT_UNIQUE,
+    NO_SPECTRAL_DATA_ADDED
+};
+
+enum INFO {
+    NEW_OBJECT_SUCCESSFULLY_ADDED_TO_DB
+};
+
+void showError(ERRORS error_msg);
+void showWarning(WARNINGS warning_msg);
+void showInfo(INFO info_msg);
+
+} // namespace sdb
+#endif // MESSAGEREPORTER_H

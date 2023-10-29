@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>maps/map.qml</file>
+        <file>json_schema/SPECTRAL_JSON.json</file>
+        <file>images/no_image_available.jpg</file>
+    </qresource>
+</RCC>
