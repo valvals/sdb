@@ -171,13 +171,15 @@ void ManualAdderDialog::on_comboBox_place_type_currentIndexChanged(const QString
 
 void ManualAdderDialog::on_pushButton_choose_image_button_clicked()
 {
+    static QString imglastChoosedPath = "/home";
     auto fileName = QFileDialog::getOpenFileName(this,
                                                  tr("Open Image"),
-                                                 "/home",
-                                                 tr("Image Files(*.png *.jpg *.bmp)"));
+                                                 imglastChoosedPath,
+                                                 tr("Image Files(*.png *.jpg *.bmp *.JPEG)"));
     QFile file(fileName);
 
     if(file.exists()){
+        imglastChoosedPath = fileName;
         if(!file.open(QIODevice::ReadOnly))return;
         ui->label_add_image->setPixmap(QPixmap::fromImage(QImage(fileName)));
         auto rc = ui->tableWidget_images->model()->rowCount();
