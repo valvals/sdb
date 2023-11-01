@@ -286,10 +286,15 @@ void MainWindow::readSelectedData()
         QString qiS = QString(sdb::kQueryImageData).arg(imgId);
         QSqlQuery q;
         q.exec(qiS);
+
         while (q.next()) {
             QImage img;
+            db_json::IMAGE_OBJECT img_obj;
             img.loadFromData(q.value(0).toByteArray());
+            img_obj.type = q.value(1).toString();
+            img_obj.description = q.value(2).toString();
             images.append(img);
+            m_spectral_struct.md.images.append(img_obj);
         }
     }
     if(images.size()>0){
@@ -312,7 +317,7 @@ void MainWindow::readSelectedData()
         auto instrumentType = spectrsQuery.value(2).toString();  //прибор(ы)
         auto description = spectrsQuery.value(3).toString();     // дополнительные сведения
         db_json::SPECTRAL_ATRIBUTES sa = {instrumentType,spectralDataType,description};
-        qDebug()<< "Описание: " << description;
+        qDebug()<< "Описание: " << description <<instrumentType;
         m_spectral_struct.sd.atributes.append(sa);
         QString sd = spectrsQuery.value(1).toString();
         QStringList lines = sd.split("\n");
@@ -419,6 +424,17 @@ void MainWindow::readSelectedData()
     model->setData(model->index(8,1),ReplaceTextifUndefined(m_spectral_struct.md.air_conditions.temperature));
     model->setData(model->index(9,0),"Влажнось");
     model->setData(model->index(9,1),ReplaceTextifUndefined(m_spectral_struct.md.air_conditions.humidity));
+
+    if(!m_spectral_struct.sd.atributes.empty()){
+    model->setData(model->index(10,0),"Прибор");// TODO change instrument for different indexes
+    model->setData(model->index(10,1),m_spectral_struct.sd.atributes[0].instrument);
+    model->setData(model->index(11,0),"Тип данных");// TODO change instrument for different indexes
+    model->setData(model->index(11,1),m_spectral_struct.sd.atributes[0].type);
+    model->setData(model->index(12,0),"доп.спек.инфо");// TODO change instrument for different indexes
+    model->setData(model->index(12,1),m_spectral_struct.sd.atributes[0].description);
+    model->setData(model->index(13,0),"доп.изоб.инфо");// TODO change instrument for different indexes
+    model->setData(model->index(13,1),m_spectral_struct.md.images[0].description);
+    }
 
 }
 

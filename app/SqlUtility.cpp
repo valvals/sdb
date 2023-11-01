@@ -15,7 +15,7 @@ const char kQuerySelectAllPlaceNames[] = "SELECT name FROM places";
 const char kQuerySelectAllPlaceTypes[] = "SELECT place_type_name FROM place_types";
 
 const char kQueryImageIds[] = "SELECT image_id FROM images_measurements WHERE measurements_id == %1";
-const char kQueryImageData[] = "SELECT data FROM images WHERE id == %1";
+const char kQueryImageData[] = "SELECT data, image_type, description FROM images WHERE id == %1";
 const char kQuerySpectrData[] = "SELECT data_type, data, instrument, description FROM spectral_data_measurements WHERE measurements_id == %1";
 const char kQueryLocation[] = "SELECT location_name, place_name, region_name, latitude, longitude, altitude FROM location WHERE location_name ='%1'";
 const char kQueryClassification[] = "SELECT location_name,objects.object_name,objects.class_name,classes.general_type_name FROM measurements INNER JOIN objects ON objects.object_name = measurements.surface INNER JOIN classes ON classes.class_name = objects.class_name WHERE measurements.id = %1";

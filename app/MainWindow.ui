@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>600</height>
+    <width>1249</width>
+    <height>688</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -196,8 +196,12 @@
          </size>
         </property>
         <property name="rowCount">
-         <number>10</number>
+         <number>14</number>
         </property>
+        <row/>
+        <row/>
+        <row/>
+        <row/>
         <row/>
         <row/>
         <row/>
@@ -260,7 +264,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1200</width>
+     <width>1249</width>
      <height>20</height>
     </rect>
    </property>
