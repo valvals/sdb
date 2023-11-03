@@ -37,7 +37,7 @@ std::string convertDecimalDegridToGradusMinutesSeconds(const double &latitude,
     longSeconds %= 60;
 
     std::string coordinates;
-    coordinates.append(std::to_string(latDegrees));
+    coordinates.append(std::to_string(std::abs(latDegrees)));
     coordinates.append(gradus);
     coordinates.append(std::to_string(latMinutes));
     coordinates.append(minutes);
@@ -49,7 +49,7 @@ std::string convertDecimalDegridToGradusMinutesSeconds(const double &latitude,
         coordinates.append(South);
     };
     coordinates.append(Plus);
-    coordinates.append(std::to_string(longDegrees));
+    coordinates.append(std::to_string(std::abs(longDegrees)));
     coordinates.append(gradus);
     coordinates.append(std::to_string(longMinutes));
     coordinates.append(minutes);

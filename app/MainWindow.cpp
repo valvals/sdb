@@ -433,7 +433,9 @@ void MainWindow::readSelectedData()
     model->setData(model->index(12,0),"доп.спек.инфо");// TODO change instrument for different indexes
     model->setData(model->index(12,1),m_spectral_struct.sd.atributes[0].description);
     model->setData(model->index(13,0),"доп.изоб.инфо");// TODO change instrument for different indexes
+    if(!m_spectral_struct.md.images.empty()){
     model->setData(model->index(13,1),m_spectral_struct.md.images[0].description);
+    }
     }
 
 }
