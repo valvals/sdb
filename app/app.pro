@@ -1,4 +1,4 @@
-QT += core gui sql printsupport quick quickwidgets
+QT += core gui sql printsupport quick quickwidgets network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,14 +13,14 @@ SOURCES += \
     ManualAdderDialog.cpp \
     MapPointer.cpp \
     MessageReporter.cpp \
-    NetDataManager.cpp \
     PlotShow.cpp \
     QCustomPlot.cpp \
     SqlUtility.cpp \
     UselessDataCutter.cpp \
     google_maps_url_maker.cpp \
     main.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    net_data_manager.cpp
 
 HEADERS += \
     BaseValuesAdderDialog.h \
@@ -30,13 +30,13 @@ HEADERS += \
     ManualAdderDialog.h \
     MapPointer.h \
     MessageReporter.h \
-    NetDataManager.h \
     PlotShow.h \
     QCustomPlot.h \
     SqlUtility.h \
     Types.h \
     UselessDataCutter.h \
-    google_maps_url_maker.h
+    google_maps_url_maker.h \
+    net_data_manager.h
 
 FORMS += \
     BaseValuesAdderDialog.ui \

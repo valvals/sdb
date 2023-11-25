@@ -13,7 +13,7 @@
 #include "../libs/DBJson.h"
 #include "google_maps_url_maker.h"
 //#include "UselessDataCutter.h"
-
+#include "net_data_manager.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -75,6 +75,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableView->addAction(createNewMeasurementBasedOnTheSelected);
     connect(createNewMeasurementBasedOnTheSelected,SIGNAL(triggered()),SLOT(onRequestedToAddDataBasedOnSelected()));
     readSelectedData();
+
+    NetDataManager* rdm = new NetDataManager(87654,98765,"_Signature");
+    NetDataManager* ndm = new NetDataManager(98765,87654,"_Spectrabox");
+    ndm->sendMessage("Hello World!");
+    rdm->sendMessage("How do you do?");
 }
 
 MainWindow::~MainWindow()
