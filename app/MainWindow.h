@@ -39,7 +39,7 @@ private slots:
     void copyJsonToClipboard();
     void openGoogleMapWithForCurrentPosition();
     void onRequestedToAddDataBasedOnSelected();
-
+    void sendSelectedDataToSignature();
 
 private:
     Ui::MainWindow *ui;

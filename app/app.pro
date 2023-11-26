@@ -19,8 +19,8 @@ SOURCES += \
     UselessDataCutter.cpp \
     google_maps_url_maker.cpp \
     main.cpp \
-    MainWindow.cpp \
-    net_data_manager.cpp
+    MainWindow.cpp\
+    ../ipc/net_data_manager.cpp
 
 HEADERS += \
     BaseValuesAdderDialog.h \
@@ -35,8 +35,8 @@ HEADERS += \
     SqlUtility.h \
     Types.h \
     UselessDataCutter.h \
-    google_maps_url_maker.h \
-    net_data_manager.h
+    google_maps_url_maker.h\
+    ../ipc/net_data_manager.h
 
 FORMS += \
     BaseValuesAdderDialog.ui \

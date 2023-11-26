@@ -13,9 +13,9 @@
 #include "../libs/DBJson.h"
 #include "google_maps_url_maker.h"
 //#include "UselessDataCutter.h"
-#include "net_data_manager.h"
+#include "../ipc/net_data_manager.h"
 
-
+NetDataManager* ndm;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     ,ui(new Ui::MainWindow)
@@ -74,12 +74,16 @@ MainWindow::MainWindow(QWidget *parent)
     createNewMeasurementBasedOnTheSelected->setText("создать новую запись на основе текущего измерения");
     ui->tableView->addAction(createNewMeasurementBasedOnTheSelected);
     connect(createNewMeasurementBasedOnTheSelected,SIGNAL(triggered()),SLOT(onRequestedToAddDataBasedOnSelected()));
+
+    QAction *sendDataToSignature = new QAction;
+    sendDataToSignature->setText("Передать в приложение 'Сигнатура'");
+    ui->tableView->addAction(sendDataToSignature);
+    connect(sendDataToSignature,SIGNAL(triggered()),SLOT(sendSelectedDataToSignature()));
+
     readSelectedData();
 
-    NetDataManager* rdm = new NetDataManager(87654,98765,"_Signature");
-    NetDataManager* ndm = new NetDataManager(98765,87654,"_Spectrabox");
-    ndm->sendMessage("Hello World!");
-    rdm->sendMessage("How do you do?");
+    ndm = new NetDataManager(98765,87654,"_Spectrabox");
+    connect(ndm,SIGNAL(dataRecieved(QString)),ui->statusbar,SLOT(showMessage(QString)));
 }
 
 MainWindow::~MainWindow()
@@ -114,7 +118,6 @@ void MainWindow::on_pushButton_imageLeft_clicked()
         ui->label_Image->setPixmap(QPixmap::fromImage(images[image_current_index]));
         showCurrentImageIndex();
     }
-
 }
 
 void MainWindow::on_pushButton_imageRight_clicked()
@@ -481,6 +484,16 @@ void MainWindow::onRequestedToAddDataBasedOnSelected()
     qDebug()<<"check create new on selected...";
     if(manual_adder_dialog->window()->isHidden())manual_adder_dialog->show();
     manual_adder_dialog->fillDataBasedOnSelectedMeasurements(m_spectral_struct);
+}
+
+void MainWindow::sendSelectedDataToSignature()
+{
+    QJsonObject jo;
+    db_json::getJsonObjectFromStruct(m_spectral_struct,jo);
+    QJsonDocument jd(jo);
+    QByteArray ba = jd.toJson(QJsonDocument::Compact);
+    qDebug()<<"msg_size: "<<ba.size();
+    ndm->sendMessage(m_spectral_struct.md.location.local_name.toUtf8());
 }
 
 QString MainWindow::ReplaceTextifUndefined(const double &param)

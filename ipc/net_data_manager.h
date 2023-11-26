@@ -13,8 +13,12 @@ public:
     NetDataManager(const int& recieverPort,
                    const int& senderPort,
                    const QString &manager_name);
+    ~NetDataManager();
 
 void sendMessage(QByteArray datagram);
+
+signals:
+void dataRecieved(QString message);
 
 private slots:
     void onDataRecieved();

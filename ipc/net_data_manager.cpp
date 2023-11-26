@@ -14,6 +14,12 @@ NetDataManager::NetDataManager(const int& recieverPort,
     connect(m_reciver, SIGNAL(readyRead()), SLOT(onDataRecieved()));
 }
 
+NetDataManager::~NetDataManager()
+{
+    m_sender->close();
+    m_reciver->close();
+}
+
 void NetDataManager::sendMessage(QByteArray datagram)
 {
     QHostAddress ha(QHostAddress::SpecialAddress::LocalHost);
@@ -29,4 +35,5 @@ void NetDataManager::onDataRecieved()
     }
     datagram.append(m_manager_name);
     qDebug()<<"Recieved data: "<<datagram.constData();
+    emit dataRecieved(datagram.data());
 }
